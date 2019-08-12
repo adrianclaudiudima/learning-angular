@@ -1,0 +1,33 @@
+<h3>User Administration</h3>
+
+<div class="mat-body-1">
+  <div>Parent username : {{parentUsername}} </div>
+  <div>Parent email :  {{parentUserEmail}}</div>
+
+  <button (click)="resetParentValues()">Reset parent values</button>
+</div>
+
+<div class="mat-body-1">
+  User : {{user | json}}
+</div>
+
+<div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="20px">
+
+  <app-user-details
+    [username]="parentUsername"
+    [email]="parentUserEmail"
+    (usernameChange)="handleUsernameChanged($event)"
+    (emailChange)="handleEmailChanged($event)"
+  >
+  </app-user-details>
+
+  <app-user-details
+    [(username)]="parentUsername"
+    [(email)]="parentUserEmail">
+  </app-user-details>
+
+  <app-user-details [user]="user"></app-user-details>
+
+
+</div>
+
