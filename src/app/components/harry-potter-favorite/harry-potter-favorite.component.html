@@ -1,0 +1,10 @@
+<div class="mat-title">Favorite characters</div>
+
+<div fxLayout="row wrap" fxLayoutAlign="start center">
+  <div *ngFor="let character of listOfFavoriteCharacter$ | async" class="mat-elevation-z1"
+       style="width: 120px;padding: 20px;">
+    <div class="mat-title">{{character.name}}</div>
+    <div class="mat-body-2">{{character.house}}</div>
+  </div>
+
+</div>

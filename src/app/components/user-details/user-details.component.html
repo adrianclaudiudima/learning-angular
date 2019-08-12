@@ -1,29 +1,24 @@
-<div style="max-width: 300px; padding: 5px;" class="mat-elevation-z1">
+<div style="max-width: 300px; padding: 20px;" class="mat-elevation-z1">
   <div class="mat-title">User details</div>
   <div class="mat-body-1" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div>Username</div>
       :
-      <div *ngIf="user else usernameView">
+      <div>
         <div>{{user.name}}</div>
         <input type="text" [(ngModel)]="user.name">
       </div>
-      <ng-template #usernameView>{{username}}</ng-template>
     </div>
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div>Email</div>
       :
-      <div *ngIf="user else useremailView">
+      <div>
         {{user.email}}
       </div>
-      <ng-template #useremailView>{{email}}</ng-template>
     </div>
   </div>
-  <div *ngIf="user else resetVal">
-    <button (click)="resetUserValue()">Reset User Value</button>
+  <div>
+    <button color="primary" mat-raised-button (click)="resetUserValue()">Reset User Value</button>
   </div>
-  <ng-template #resetVal>
-    <button (click)="resetValues()">Reset</button>
-  </ng-template>
 
 </div>

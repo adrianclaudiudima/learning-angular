@@ -1,0 +1,46 @@
+<div fxLayout="row wrap" fxLayoutGap="30px">
+
+
+  <mat-card appHoverDirective class="example-card" *ngFor="let character of listOfCharacters$ | async">
+    <mat-card-header>
+      <div [ngStyle]="{'background-image' : 'url(' + character.image+')'}"
+           mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{character.name}}</mat-card-title>
+      <mat-card-subtitle>{{character.gender}}</mat-card-subtitle>
+    </mat-card-header>
+
+    <div class="img-container">
+      <div class="img" [ngStyle]="{'background-image':'url(' + character.image + ')'}"></div>
+    </div>
+
+    <mat-card-content>
+      <div fxLayout="column">
+        <div fxLayout="row">
+          <div class="mat-body-2">Actor :</div>
+          <div class="mat-body-1">{{character.actor}}</div>
+        </div>
+
+        <div fxLayout="row">
+          <div class="mat-body-2">Date of Birth :</div>
+          <div class="mat-body-1">{{character.dateOfBirth}}</div>
+        </div>
+        <div fxLayout="row">
+          <div class="mat-body-2">Still alive ?</div>
+          <div class="mat-body-1">{{character.alive}}</div>
+        </div>
+
+        <div fxLayout="row">
+          <div class="mat-body-2">House :</div>
+          <div class="mat-body-1">{{character.house}}</div>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="accent" mat-raised-button (click)="addCharacterToFavorite(character)">ADD TO FAVORITE</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+</div>

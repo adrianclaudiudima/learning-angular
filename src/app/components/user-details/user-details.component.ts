@@ -10,26 +10,7 @@ import {User} from '../user.model';
 export class UserDetailsComponent {
 
   @Input()
-  username: string;
-
-  @Input()
-  email: string;
-
-  @Input()
   user: User;
-
-  @Output()
-  usernameChange: EventEmitter<string> = new EventEmitter<string>();
-
-  @Output()
-  emailChange: EventEmitter<string> = new EventEmitter<string>();
-
-  resetValues() {
-    this.username = 'RESET ';
-    this.email = 'RESET';
-    this.usernameChange.emit(this.username);
-    this.emailChange.emit(this.email);
-  }
 
   resetUserValue() {
     this.user.email = 'USER EMAIL CHANGED';

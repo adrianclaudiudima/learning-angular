@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {User} from '../user.model';
+import {Component, OnInit} from '@angular/core';
+import {listOfUsers, User} from '../user.model';
 
 @Component({
     selector: 'app-user-administration',
@@ -7,27 +7,17 @@ import {User} from '../user.model';
     styleUrls: ['user-administration.component.scss']
   }
 )
-export class UserAdministrationComponent {
+export class UserAdministrationComponent implements OnInit {
 
-  parentUsername = 'First username';
-  parentUserEmail = 'First email';
+  currentUsers: Array<User>;
 
   user: User = {
     name: 'Some name',
     email: 'Some email'
   };
 
-  resetParentValues() {
-    this.parentUserEmail = 'CHANGED';
-    this.parentUsername = 'CHANGED';
-  }
-
-  handleUsernameChanged(username: string) {
-    this.parentUsername = username;
-  }
-
-  handleEmailChanged(email: string) {
-    this.parentUserEmail = email;
+  ngOnInit(): void {
+    this.currentUsers = listOfUsers;
   }
 
 }
