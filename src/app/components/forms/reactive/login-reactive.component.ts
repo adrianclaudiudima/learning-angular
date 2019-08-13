@@ -1,26 +1,38 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from '@angular/forms';
 import {HarryPotterService} from '../../../services/harry-potter.service';
 import {Subscription} from 'rxjs';
+import {ActivatedRoute} from '@angular/router';
+import {tap} from 'rxjs/operators';
 
 @Component({
   selector: 'app-login-reactive',
   templateUrl: 'login-reactive.component.html',
   styleUrls: ['login-reactive.component.scss']
 })
-export class LoginReactiveComponent {
-
+export class LoginReactiveComponent implements OnInit {
 
   loginFormGroup: FormGroup;
-
   usernameChangeSubscription: Subscription;
 
-  constructor(private formBuilder: FormBuilder, private applicationService: HarryPotterService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private applicationService: HarryPotterService,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.loginFormGroup = this.formBuilder.group({
       username: ['', Validators.compose([Validators.required, Validators.email, forbiddenNameValidator(/Adrian/i)])],
       password: ['', Validators.required]
     });
     this.usernameChangeSubscription = this.loginFormGroup.get('username').valueChanges.subscribe(value => {
+
+    });
+  }
+
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.pipe(
+      tap(v => console.log(v))
+    ).subscribe(value => {
 
     });
   }

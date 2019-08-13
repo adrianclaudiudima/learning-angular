@@ -1,14 +1,16 @@
 <mat-toolbar color="primary">
-  <span>My Application</span>
+  <span routerLink="/">My Application</span>
+
+  <span style=" flex: 1 1 auto;"></span>
+
+  <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="30px">
+    <div routerLink="/harry-potter-list" routerLinkActive="active-link" class="action-link">Harry Potter List</div>
+    <div routerLink="/login" routerLinkActive="active-link" class="action-link">Login</div>
+  </div>
+
 </mat-toolbar>
 
-<app-login-template></app-login-template>
+<div style="margin: 0 auto;max-width: 1300px">
+  <router-outlet></router-outlet>
+</div>
 
-
-<app-login-reactive></app-login-reactive>
-
-<!--<app-harry-potter-favorite></app-harry-potter-favorite>
-
-<app-harry-potter-character-list>
-
-</app-harry-potter-character-list>-->

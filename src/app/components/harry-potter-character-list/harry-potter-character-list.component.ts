@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {HarryPotterService} from '../../services/harry-potter.service';
-import {Observable, Subscription} from 'rxjs';
+import {Observable} from 'rxjs';
 import {HarryPotterModel} from '../../services/harry-potter.model';
 import {tap} from 'rxjs/operators';
 
@@ -12,6 +12,8 @@ import {tap} from 'rxjs/operators';
 })
 export class HarryPotterCharacterListComponent implements OnInit {
 
+  displayData = false;
+
   listOfCharacters$: Observable<Array<HarryPotterModel>>;
 
   constructor(private harryPotterService: HarryPotterService) {
@@ -19,10 +21,12 @@ export class HarryPotterCharacterListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listOfCharacters$ = this.harryPotterService.getAllCharacters();
     this.listOfCharacters$ = this.harryPotterService.getAllCharacters()
       .pipe(
-        tap(v => console.log(v))
+        tap(v => {
+          console.log(v);
+          this.displayData = true;
+        })
       );
   }
 

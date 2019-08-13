@@ -16,6 +16,7 @@ import {LoginTemplateComponent} from './components/forms/template/login-template
 import {LoginReactiveComponent} from './components/forms/reactive/login-reactive.component';
 import {MatInputModule} from '@angular/material/input';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {HomeComponent} from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     HarryPotterCharacterListComponent,
     HarryPotterFavoriteComponent,
     LoginTemplateComponent,
-    LoginReactiveComponent
+    LoginReactiveComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -36,11 +38,11 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     HttpClientModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    AppRoutingModule
   ],
   providers: [
     HarryPotterService

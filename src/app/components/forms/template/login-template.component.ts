@@ -1,8 +1,10 @@
 import {AfterViewInit, Component, OnDestroy, ViewChild} from '@angular/core';
 import {NgForm, NgModel} from '@angular/forms';
 import {UserCredential} from '../user.model';
-import {Subscription} from 'rxjs';
-import {debounce, debounceTime, map} from 'rxjs/operators';
+import {Observable, of, Subscription} from 'rxjs';
+import {catchError, concatMap, debounce, debounceTime, map, tap} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-login-template',
@@ -10,6 +12,32 @@ import {debounce, debounceTime, map} from 'rxjs/operators';
   styleUrls: ['login-template.component.scss']
 })
 export class LoginTemplateComponent implements AfterViewInit, OnDestroy {
+
+  isError = false;
+  domainModel: Observable<any>;
+
+  constructor(private activatedRoute: ActivatedRoute, private httpClient: HttpClient) {
+    this.domainModel = this.activatedRoute.paramMap.pipe(
+      map(paramMap => paramMap.get('id')),
+      concatMap(id => this.httpClient.get('http://localhost:8080/api-path/' + id)),
+      catchError(err => {
+        // todo add errorHandling
+        this.isError = true;
+        return of(undefined);
+      }),
+      tap(v => {
+        if (v !== undefined) {
+          this.isError = false;
+        }
+      })
+    );
+
+
+    this.activatedRoute.params.subscribe(value => {
+      console.log(value);
+    });
+
+  }
 
   @ViewChild('usernameInputFormControl', {static: true})
   usernameInput: NgModel;
@@ -27,7 +55,6 @@ export class LoginTemplateComponent implements AfterViewInit, OnDestroy {
     this.usernameInputSubscription = this.usernameInput.valueChanges
       .pipe(
         debounceTime(300),
-
       )
       .subscribe(value => {
         console.log(value);
@@ -37,6 +64,5 @@ export class LoginTemplateComponent implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     this.usernameInputSubscription.unsubscribe();
   }
-
 
 }
