@@ -1,0 +1,44 @@
+<form [formGroup]="loginFormGroup" (ngSubmit)="submitForm()" fxLayout="column" style="max-width: 400px; padding: 40px;"
+      class="mat-elevation-z3">
+  <div fxLayout="row" fxLayoutAlign="center center" class="mat-headline">Login - Reactive</div>
+
+  <div fxLayout="row" fxLayoutAlign="center center" *ngIf="loginFormGroup.hasError('invalidUser')">
+    <div style="width: 200px;height: 60px;padding: 10px; text-align: center; background-color: red; color: white">
+      Something went wrong...
+    </div>
+
+  </div>
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="username"
+      placeholder="Username"
+    >
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('required')">
+      Username is <strong>required.</strong>
+    </mat-error>
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('email')">
+      Username must be an <strong>email.</strong>
+    </mat-error>
+
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('invalidUser')">
+      Could not create user. Something went wrong.
+    </mat-error>
+
+    <mat-error *ngIf="loginFormGroup.get('username').hasError('forbiddenName')">
+      Adrian is not allowed.
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      formControlName="password"
+      placeholder="Password"
+    >
+    <mat-error *ngIf="loginFormGroup.get('password').hasError('required')">
+      Password is <strong>required.</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" style="margin-top: 20px">LOGIN</button>
+</form>

@@ -7,6 +7,7 @@ import {HarryPotterModel} from './harry-potter.model';
 export class HarryPotterService {
 
   private API_CHARACTERS_URL = 'http://hp-api.herokuapp.com/api/characters';
+  private LOGIN_URL = 'http://localhost:8080/auth';
 
   private favoriteHarryPotterCharacters: Array<HarryPotterModel> = [];
   private favoriteHarryPotterCharactersSubject: Subject<Array<HarryPotterModel>> = new ReplaySubject(1);
@@ -27,6 +28,12 @@ export class HarryPotterService {
 
   getHarryPotterFavoriteCharacters() {
     return this.favoriteHarryPotterCharacters;
+  }
+
+
+  loginUser(username: string, password: string): Observable<any> {
+    return this.httpClient.post(this.LOGIN_URL, {username, password});
+
   }
 
 }
